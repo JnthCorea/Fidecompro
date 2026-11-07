@@ -139,6 +139,19 @@ public class VentanaRegistroClientes extends javax.swing.JFrame {
             String identificacion = txtIdentificacion.getText();
             String telefono = txtTelefono.getText();
             String correo = txtCorreo.getText();
+            
+            if (nombre.isBlank()
+                || identificacion.isBlank()
+                || telefono.isBlank()
+                || correo.isBlank()) {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Debe completar todos los espacios"
+            );
+
+            return;
+        }
 
             Cliente nuevoCliente = new Cliente(
                 id,
