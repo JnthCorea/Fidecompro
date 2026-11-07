@@ -1,14 +1,40 @@
 package fidecompro;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+import java.util.ArrayList;
 
-/**
- *
- * @author Corea
- */
 public class Inventario {
-    
+
+    private ArrayList<Producto> productos;
+
+    public Inventario() {
+        productos = new ArrayList<>();
+    }
+
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+    public Producto buscarProducto(String codigo)
+            throws ProductoNoEncontradoException {
+
+        for (Producto producto : productos) {
+            if (producto.getCodigo().equalsIgnoreCase(codigo)) {
+                return producto;
+            }
+        }
+
+        throw new ProductoNoEncontradoException(
+                "No se encontró un producto con el código: " + codigo);
+    }
+
+    public void actualizarExistencia(String codigo, int cantidad)
+            throws ProductoNoEncontradoException {
+
+        Producto producto = buscarProducto(codigo);
+        producto.actualizarExistencia(cantidad);
+    }
+
+    public ArrayList<Producto> obtenerProductos() {
+        return productos;
+    }
 }
